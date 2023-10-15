@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -14,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody _rb;
     private Vector3 _inputVelocity;
     private Vector3 _previousInputVelocity;
+    private Vector3 _previousRBVelocity;
     private Vector3 _velocity;
 
     private float _distanseToBottom = 0.5228f;
@@ -23,6 +25,7 @@ public class PlayerMovement : MonoBehaviour
     {
         _playerInput = new PlayerInput();
         _playerInput.Player.Jump.performed += context => Jump();
+        _playerInput.Player.ThrowPlane.performed += context => ThrowPlane();
         //_playerInput.Player.Move.performed += context => Move(context);
         //_playerInput.Player.Charge.performed += context => Charge(context);
     }
@@ -48,17 +51,17 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Move();
+        //Move();
     }
 
     private void FixedUpdate()
     {
-        //Move();
+        Move();
     }
 
     private bool IsGrounded()
     {
-        return Physics.Raycast(transform.position, -Vector3.up, _distanseToBottom + 0.1f);
+        return Physics.Raycast(transform.position, -Vector3.up, _distanseToBottom + 0.01f);
     }
 
     private void Jump()
@@ -76,6 +79,8 @@ public class PlayerMovement : MonoBehaviour
         _inputVelocity = _playerInput.Player.Move.ReadValue<Vector2>();
         _inputVelocity = new Vector3(_inputVelocity.x, 0f, _inputVelocity.y);
 
+        Debug.Log(IsGrounded());
+
         if (IsGrounded())
         {
             _inputVelocity *= movementFactor;
@@ -85,10 +90,16 @@ public class PlayerMovement : MonoBehaviour
             _inputVelocity *= airMovementFactor;
         }
         _inputVelocity = transform.TransformDirection(_inputVelocity);
-        Debug.Log(_inputVelocity);
-        _rb.velocity -= _previousInputVelocity;
-        _rb.velocity += _inputVelocity;
+
+        _rb.MovePosition(_rb.position + _inputVelocity * Time.fixedDeltaTime);
+        _rb.AddRelativeForce(_inputVelocity * Time.fixedDeltaTime, ForceMode.VelocityChange);
 
         _previousInputVelocity = _inputVelocity;
+        _previousRBVelocity = _rb.velocity;
+    }
+
+    private void ThrowPlane()
+    {
+
     }
 }

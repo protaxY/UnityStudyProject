@@ -80,6 +80,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""ThrowPlane"",
+                    ""type"": ""Button"",
+                    ""id"": ""817d7730-8fc3-4836-9d8f-d0807c6fca19"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -192,6 +201,17 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""action"": ""SightMove"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""78dc845d-5b76-47a8-9cd6-fda04859a80a"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse and Keyboard"",
+                    ""action"": ""ThrowPlane"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -223,6 +243,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_Player_SightMoveX = m_Player.FindAction("SightMoveX", throwIfNotFound: true);
         m_Player_SightMoveY = m_Player.FindAction("SightMoveY", throwIfNotFound: true);
         m_Player_SightMove = m_Player.FindAction("SightMove", throwIfNotFound: true);
+        m_Player_ThrowPlane = m_Player.FindAction("ThrowPlane", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -290,6 +311,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_SightMoveX;
     private readonly InputAction m_Player_SightMoveY;
     private readonly InputAction m_Player_SightMove;
+    private readonly InputAction m_Player_ThrowPlane;
     public struct PlayerActions
     {
         private @PlayerInput m_Wrapper;
@@ -300,6 +322,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @SightMoveX => m_Wrapper.m_Player_SightMoveX;
         public InputAction @SightMoveY => m_Wrapper.m_Player_SightMoveY;
         public InputAction @SightMove => m_Wrapper.m_Player_SightMove;
+        public InputAction @ThrowPlane => m_Wrapper.m_Player_ThrowPlane;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -327,6 +350,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @SightMove.started += instance.OnSightMove;
             @SightMove.performed += instance.OnSightMove;
             @SightMove.canceled += instance.OnSightMove;
+            @ThrowPlane.started += instance.OnThrowPlane;
+            @ThrowPlane.performed += instance.OnThrowPlane;
+            @ThrowPlane.canceled += instance.OnThrowPlane;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -349,6 +375,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @SightMove.started -= instance.OnSightMove;
             @SightMove.performed -= instance.OnSightMove;
             @SightMove.canceled -= instance.OnSightMove;
+            @ThrowPlane.started -= instance.OnThrowPlane;
+            @ThrowPlane.performed -= instance.OnThrowPlane;
+            @ThrowPlane.canceled -= instance.OnThrowPlane;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -383,5 +412,6 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnSightMoveX(InputAction.CallbackContext context);
         void OnSightMoveY(InputAction.CallbackContext context);
         void OnSightMove(InputAction.CallbackContext context);
+        void OnThrowPlane(InputAction.CallbackContext context);
     }
 }
