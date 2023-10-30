@@ -80,6 +80,18 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 4865064391339405807, guid: 3fcb97612c02c9e48bbed4fe9a9a8579, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.3218097
+      objectReference: {fileID: 0}
+    - target: {fileID: 4865064391339405807, guid: 3fcb97612c02c9e48bbed4fe9a9a8579, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.1503937
+      objectReference: {fileID: 0}
+    - target: {fileID: 4865064391339405807, guid: 3fcb97612c02c9e48bbed4fe9a9a8579, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.05027398
+      objectReference: {fileID: 0}
     - target: {fileID: 5904977111739964907, guid: 3fcb97612c02c9e48bbed4fe9a9a8579, type: 3}
       propertyPath: m_Layer
       value: 9
