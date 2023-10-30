@@ -50,7 +50,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: a8c6adfc8ff72a6489f75a81b4023b12, type: 3}
       propertyPath: m_Name
-      value: monitor2
+      value: Monitor2
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a8c6adfc8ff72a6489f75a81b4023b12, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

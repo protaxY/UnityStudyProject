@@ -48,9 +48,33 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7180156505347979315, guid: 530de486a8dd6694ebaec59c33e87d4a, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: -6910469105156996146, guid: 530de486a8dd6694ebaec59c33e87d4a, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 530de486a8dd6694ebaec59c33e87d4a, type: 3}
       propertyPath: m_Name
-      value: u_a_low
+      value: UALow1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 530de486a8dd6694ebaec59c33e87d4a, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1776572561986084650, guid: 530de486a8dd6694ebaec59c33e87d4a, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2692870668321871644, guid: 530de486a8dd6694ebaec59c33e87d4a, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3964148625904671864, guid: 530de486a8dd6694ebaec59c33e87d4a, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -544430660522058349, guid: 530de486a8dd6694ebaec59c33e87d4a, type: 3}

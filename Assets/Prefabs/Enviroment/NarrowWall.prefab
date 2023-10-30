@@ -52,6 +52,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: NarrowWall
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9901940f7289e32428ee8932f44cbec5, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -48,9 +48,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -1002823390260377324, guid: f0ce4902a055fa748999c977d28adbd9, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: f0ce4902a055fa748999c977d28adbd9, type: 3}
       propertyPath: m_Name
       value: Clock2
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f0ce4902a055fa748999c977d28adbd9, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2408872321553098650, guid: f0ce4902a055fa748999c977d28adbd9, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

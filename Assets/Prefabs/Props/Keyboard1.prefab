@@ -50,7 +50,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 204a4883b73f65543ab2d72e2909e2fa, type: 3}
       propertyPath: m_Name
-      value: keyboard1
+      value: Keyboard1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 204a4883b73f65543ab2d72e2909e2fa, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

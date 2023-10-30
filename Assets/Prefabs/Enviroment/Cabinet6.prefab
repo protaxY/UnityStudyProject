@@ -48,9 +48,33 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8643757193077237080, guid: 9393c256f0074594ab23b97e67be0e07, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -7477678634188411071, guid: 9393c256f0074594ab23b97e67be0e07, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -1878942075553453651, guid: 9393c256f0074594ab23b97e67be0e07, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -20798901792520861, guid: 9393c256f0074594ab23b97e67be0e07, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 9393c256f0074594ab23b97e67be0e07, type: 3}
       propertyPath: m_Name
       value: Cabinet6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9393c256f0074594ab23b97e67be0e07, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5817622323915203329, guid: 9393c256f0074594ab23b97e67be0e07, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:

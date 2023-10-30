@@ -50,7 +50,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: e09e31e161d51bb47a5b643cb099c84a, type: 3}
       propertyPath: m_Name
-      value: cooller
+      value: Cooller
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e09e31e161d51bb47a5b643cb099c84a, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

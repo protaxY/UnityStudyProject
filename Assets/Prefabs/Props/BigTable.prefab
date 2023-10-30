@@ -48,9 +48,41 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -6345117825289443190, guid: 1d0f0377e038c8149a1b79a61692514f, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: -5486603415466280802, guid: 1d0f0377e038c8149a1b79a61692514f, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 233588462237741088, guid: 1d0f0377e038c8149a1b79a61692514f, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 1d0f0377e038c8149a1b79a61692514f, type: 3}
       propertyPath: m_Name
-      value: big_table
+      value: BigTable
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1d0f0377e038c8149a1b79a61692514f, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1558525132243500111, guid: 1d0f0377e038c8149a1b79a61692514f, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2716701620398677189, guid: 1d0f0377e038c8149a1b79a61692514f, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8180595211770304827, guid: 1d0f0377e038c8149a1b79a61692514f, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8800238943130225417, guid: 1d0f0377e038c8149a1b79a61692514f, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -50,7 +50,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: e9dfa8ccd240f294897df4ed0de0cb73, type: 3}
       propertyPath: m_Name
-      value: pc_mouse2
+      value: PCMouse2
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e9dfa8ccd240f294897df4ed0de0cb73, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

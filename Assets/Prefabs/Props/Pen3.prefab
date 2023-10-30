@@ -50,7 +50,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 0ee78de901197e74797d2f28e84f40c2, type: 3}
       propertyPath: m_Name
-      value: pen3
+      value: Pen3
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 0ee78de901197e74797d2f28e84f40c2, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

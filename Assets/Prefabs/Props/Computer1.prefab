@@ -50,7 +50,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: f9f12d2163d54454cabf691de1b7a45a, type: 3}
       propertyPath: m_Name
-      value: computer1
+      value: Computer1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f9f12d2163d54454cabf691de1b7a45a, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

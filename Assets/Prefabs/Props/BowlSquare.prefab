@@ -48,9 +48,33 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -3579762658440655616, guid: c19b13a4a3912c1439d01a7c4b7a8d4f, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: -2780021310083004024, guid: c19b13a4a3912c1439d01a7c4b7a8d4f, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: -1588704211644537920, guid: c19b13a4a3912c1439d01a7c4b7a8d4f, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: c19b13a4a3912c1439d01a7c4b7a8d4f, type: 3}
       propertyPath: m_Name
       value: BowlSquare
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c19b13a4a3912c1439d01a7c4b7a8d4f, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1244657765967053898, guid: c19b13a4a3912c1439d01a7c4b7a8d4f, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3830303813273613396, guid: c19b13a4a3912c1439d01a7c4b7a8d4f, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -7263774926191246782, guid: c19b13a4a3912c1439d01a7c4b7a8d4f, type: 3}
