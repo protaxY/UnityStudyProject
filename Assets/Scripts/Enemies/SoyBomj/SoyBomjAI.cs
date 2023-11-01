@@ -33,7 +33,7 @@ public class SoyBomjAi : MonoBehaviour
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        animator = GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
 
         //Debug.Log(animator.parameters);
     }
