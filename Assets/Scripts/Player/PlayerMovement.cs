@@ -1,33 +1,32 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+using System.Threading.Tasks;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [SerializeField] public LayerMask whatIsPlayer;
     [SerializeField] public float movementFactor;
     [SerializeField] public float airMovementFactor;
     [SerializeField] public float chargeFactor;
     [SerializeField] public float jumpFactor;
+    [SerializeField] public float chargeRecoveryTime;
 
+    LayerMask excludePlayer;
     private Rigidbody _rb;
-    private Vector3 _inputVelocity;
-    private Vector3 _previousInputVelocity;
-    private Vector3 _previousRBVelocity;
-    private Vector3 _velocity;
-
     private float _distanseToBottom = 0.5228f;
     private PlayerInput _playerInput;
+    private bool _isCharging = false;
 
     private void Awake()
     {
         _playerInput = new PlayerInput();
         _playerInput.Player.Jump.performed += context => Jump();
-        _playerInput.Player.ThrowPlane.performed += context => ThrowPlane();
-        //_playerInput.Player.Move.performed += context => Move(context);
-        //_playerInput.Player.Charge.performed += context => Charge(context);
+        _playerInput.Player.Charge.performed += context => StartCoroutine(ChargeAsync()); ;
     }
 
     private void OnEnable()
@@ -44,14 +43,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         _rb = GetComponent<Rigidbody>();
-        _velocity = _rb.velocity;
-        //_rb.velocity = Vector3.forward;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        //Move();
+        excludePlayer = ~(1 << whatIsPlayer);
     }
 
     private void FixedUpdate()
@@ -61,45 +53,53 @@ public class PlayerMovement : MonoBehaviour
 
     private bool IsGrounded()
     {
-        return Physics.Raycast(transform.position, -Vector3.up, _distanseToBottom + 0.01f);
+        //Debug.DrawRay(transform.position, transform.TransformDirection(-Vector3.up), Color.blue);
+        return Physics.Raycast(transform.position, transform.TransformDirection(-Vector3.up), _distanseToBottom + 0.01f, excludePlayer);
     }
 
     private void Jump()
     {
         if (IsGrounded())
         {
-            _rb.AddRelativeForce(jumpFactor * Vector3.up);
-            Debug.Log("here2");
+            _rb.AddRelativeForce(jumpFactor * Vector3.up, ForceMode.Acceleration);
         }
-        Debug.Log("here");
     }
 
     private void Move()
     {
-        _inputVelocity = _playerInput.Player.Move.ReadValue<Vector2>();
-        _inputVelocity = new Vector3(_inputVelocity.x, 0f, _inputVelocity.y);
-
-        Debug.Log(IsGrounded());
+        Vector3 inputVelocity = GetInputMovementVector();
 
         if (IsGrounded())
         {
-            _inputVelocity *= movementFactor;
+            inputVelocity *= movementFactor;
         }
         else
         {
-            _inputVelocity *= airMovementFactor;
+            inputVelocity *= airMovementFactor;
         }
-        _inputVelocity = transform.TransformDirection(_inputVelocity);
+        inputVelocity = transform.TransformDirection(inputVelocity);
 
-        _rb.MovePosition(_rb.position + _inputVelocity * Time.fixedDeltaTime);
-        _rb.AddRelativeForce(_inputVelocity * Time.fixedDeltaTime, ForceMode.VelocityChange);
-
-        _previousInputVelocity = _inputVelocity;
-        _previousRBVelocity = _rb.velocity;
+        _rb.MovePosition(_rb.position + inputVelocity * Time.fixedDeltaTime);
+        _rb.AddRelativeForce(inputVelocity * Time.fixedDeltaTime, ForceMode.VelocityChange);
     }
 
-    private void ThrowPlane()
+    private IEnumerator ChargeAsync()
     {
+        if (!_isCharging)
+        {
+            Vector3 inputVelocity = Vector3.Normalize(GetInputMovementVector());
+            _rb.AddRelativeForce(chargeFactor * inputVelocity, ForceMode.Acceleration);
+            _isCharging = true;
+            yield return new WaitForSeconds(chargeRecoveryTime);
+            _isCharging = false;
+        }
+    }
 
+    private Vector3 GetInputMovementVector()
+    {
+        Vector3 inputVector = _playerInput.Player.Move.ReadValue<Vector2>();
+        inputVector = new Vector3(inputVector.x, 0f, inputVector.y);
+        return inputVector;
     }
 }
+

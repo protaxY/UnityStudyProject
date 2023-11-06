@@ -89,6 +89,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Collect"",
+                    ""type"": ""Button"",
+                    ""id"": ""6dc6d33f-c3a3-49a5-a9b7-54ab0c25c111"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -186,7 +195,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""path"": ""<Mouse>/delta/y"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Mouse and Keyboard"",
                     ""action"": ""SightMoveY"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -197,7 +206,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""path"": ""<Mouse>/delta"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Mouse and Keyboard"",
                     ""action"": ""SightMove"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -210,6 +219,17 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Mouse and Keyboard"",
                     ""action"": ""ThrowPlane"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""92aa7696-5d53-4c6a-9a2f-4fcfcb65c29a"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse and Keyboard"",
+                    ""action"": ""Collect"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -244,6 +264,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_Player_SightMoveY = m_Player.FindAction("SightMoveY", throwIfNotFound: true);
         m_Player_SightMove = m_Player.FindAction("SightMove", throwIfNotFound: true);
         m_Player_ThrowPlane = m_Player.FindAction("ThrowPlane", throwIfNotFound: true);
+        m_Player_Collect = m_Player.FindAction("Collect", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -312,6 +333,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_SightMoveY;
     private readonly InputAction m_Player_SightMove;
     private readonly InputAction m_Player_ThrowPlane;
+    private readonly InputAction m_Player_Collect;
     public struct PlayerActions
     {
         private @PlayerInput m_Wrapper;
@@ -323,6 +345,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @SightMoveY => m_Wrapper.m_Player_SightMoveY;
         public InputAction @SightMove => m_Wrapper.m_Player_SightMove;
         public InputAction @ThrowPlane => m_Wrapper.m_Player_ThrowPlane;
+        public InputAction @Collect => m_Wrapper.m_Player_Collect;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -353,6 +376,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @ThrowPlane.started += instance.OnThrowPlane;
             @ThrowPlane.performed += instance.OnThrowPlane;
             @ThrowPlane.canceled += instance.OnThrowPlane;
+            @Collect.started += instance.OnCollect;
+            @Collect.performed += instance.OnCollect;
+            @Collect.canceled += instance.OnCollect;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -378,6 +404,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @ThrowPlane.started -= instance.OnThrowPlane;
             @ThrowPlane.performed -= instance.OnThrowPlane;
             @ThrowPlane.canceled -= instance.OnThrowPlane;
+            @Collect.started -= instance.OnCollect;
+            @Collect.performed -= instance.OnCollect;
+            @Collect.canceled -= instance.OnCollect;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -413,5 +442,6 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnSightMoveY(InputAction.CallbackContext context);
         void OnSightMove(InputAction.CallbackContext context);
         void OnThrowPlane(InputAction.CallbackContext context);
+        void OnCollect(InputAction.CallbackContext context);
     }
 }

@@ -54,7 +54,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: db94101850a275a4cb579303f1ab7ff5, type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: db94101850a275a4cb579303f1ab7ff5, type: 3}
+      propertyPath: m_TagString
+      value: Collectable
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -66,6 +70,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: db94101850a275a4cb579303f1ab7ff5, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4117004948113957223}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: db94101850a275a4cb579303f1ab7ff5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7255970042381747414}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: db94101850a275a4cb579303f1ab7ff5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -8905923018449195273}
   m_SourcePrefab: {fileID: 100100000, guid: db94101850a275a4cb579303f1ab7ff5, type: 3}
 --- !u!1 &2610338955072710692 stripped
 GameObject:
@@ -121,3 +131,35 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -745696939935553474, guid: db94101850a275a4cb579303f1ab7ff5, type: 3}
+--- !u!114 &7255970042381747414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2610338955072710692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
+--- !u!114 &-8905923018449195273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2610338955072710692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75f2e62af41c6984c98c36fc6bfc22ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  paperCount: 30
+  _outlineDrawDistance: 1.5

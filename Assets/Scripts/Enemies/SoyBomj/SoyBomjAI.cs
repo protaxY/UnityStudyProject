@@ -1,30 +1,46 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class SoyBomjAi : MonoBehaviour
 {
-    private NavMeshAgent agent;
+    [SerializeField] private float _health;
+
+    private NavMeshAgent _agent;
+    [SerializeField] private Transform _hips;
+
+    [SerializeField] private float maxAgentToHipsDistance;
 
     //Animation
-    private Animator animator;
+    private Animator _animator;
 
     [SerializeField] public Transform player;
-
     [SerializeField] public LayerMask whatIsWalkable, whatIsPlayer;
 
     //Patroling
     private Vector3 walkPoint;
     private bool walkPointSet;
+    private bool isIdle;
     [SerializeField] public float walkPointRange;
+    [SerializeField] public float minIdleTime;
+    [SerializeField] public float maxIdleTime;
 
     //Attacking
     [SerializeField] public float timeBetweenAttacks;
     private bool alreadyAttacked;
 
     // Flipping
-    
+    [SerializeField] public float flipTime;
+    [SerializeField] public float flipUpperFactor;
+    [SerializeField] public float flipImpulseFactor;
+    [SerializeField] public float flipDistance;
+    [SerializeField] public List<LayerMask> whatIsFlippableList;
+    private LayerMask whatIsFlippable;
+    private bool isFlipping;
+
     //States
     public float sightRange, attackRange;
     [SerializeField] public bool playerInSightRange, playerInAttackRange;
@@ -32,10 +48,12 @@ public class SoyBomjAi : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        agent = GetComponent<NavMeshAgent>();
-        animator = GetComponentInChildren<Animator>();
+        _agent = GetComponent<NavMeshAgent>();
+        _animator = GetComponentInChildren<Animator>();
 
-        //Debug.Log(animator.parameters);
+        foreach (LayerMask layer in whatIsFlippableList)
+            whatIsFlippable += layer;
+        isFlipping = false;
     }
 
     // Update is called once per frame
@@ -48,31 +66,54 @@ public class SoyBomjAi : MonoBehaviour
         //if (!playerInSightRange && !playerInAttackRange) Patroling();
         //if (playerInSightRange && !playerInAttackRange) ChasePlayer();
         //if (playerInAttackRange && playerInSightRange) AttackPlayer();
-        Patroling();
+
+        
     }
 
-    private void Patroling()
+    private void FixedUpdate()
     {
-        if (!walkPointSet) SearchWalkPoint();
-
-        if (walkPointSet)
+        //replace navmesh agent if it's too far
+        if ((transform.position - _hips.transform.position).magnitude > maxAgentToHipsDistance)
         {
-            agent.SetDestination(walkPoint);
-            if (!animator.GetBool("IsWalking"))
-                animator.SetBool("IsWalking", true);
-
+            transform.position = new Vector3(_hips.transform.position.x, 0f, _hips.transform.position.z);
+            _hips.localPosition = new Vector3(0f, _hips.transform.localPosition.y, 0f);
         }
 
+        StartCoroutine(Patroling());
+        StartCoroutine(FlipIfBlocks());
+    }
 
-        Vector3 distanceToWalkPoint = transform.position - walkPoint;
-
-        //Walkpoint reached
-        if (distanceToWalkPoint.magnitude < 1f)
+    private IEnumerator Patroling()
+    {
+        if (!isIdle)
         {
-            walkPointSet = false;
-            if (animator.GetBool("IsWalking"))
-                animator.SetBool("IsWalking", false);
+            if (!walkPointSet) SearchWalkPoint();
+
+            if (walkPointSet)
+            {
+                _agent.SetDestination(walkPoint);
+                isIdle = false;
+                if (!_animator.GetBool("IsWalking"))
+                    _animator.SetBool("IsWalking", true);
+
+            }
+
+            Vector3 distanceToWalkPoint = transform.position - walkPoint;
+
+            //Walkpoint reached
+            if (distanceToWalkPoint.magnitude < 2f)
+            {
+                walkPointSet = false;
+                if (_animator.GetBool("IsWalking"))
+                    _animator.SetBool("IsWalking", false);
+
+                float idleTime = Random.Range(minIdleTime, maxIdleTime);
+                isIdle = true;
+                yield return new WaitForSeconds(idleTime);
+                isIdle = false;
+            }
         }
+        
     }
 
     private void SearchWalkPoint()
@@ -85,5 +126,45 @@ public class SoyBomjAi : MonoBehaviour
 
         if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsWalkable))
             walkPointSet = true;
+    }
+
+    private IEnumerator FlipIfBlocks()
+    {
+        if (!isFlipping)
+        {
+            RaycastHit hit;           
+            //RaycastHit blockHit;           
+            if (Physics.SphereCast(_hips.position + 0.5f * _hips.forward + 0.2f * _hips.up, 0.6f, _hips.transform.forward, out hit, 0.1f))
+            {
+                //Physics.Linecast(_hips.position, hit.point + 0.001f * (hit.point - _hips.position).normalized, out blockHit);
+                // if nothing blocks
+                //if (blockHit.transform.gameObject == hit.transform.gameObject)
+                if (whatIsFlippable == (whatIsFlippable | (1 << hit.transform.gameObject.layer)))
+                {
+                    Rigidbody flipRb = hit.transform.GetComponent<Rigidbody>();
+                    Vector3 flipDirection = (hit.point - transform.position).normalized;
+                    Vector3 flipImpulse = new Vector3(flipDirection.x, flipUpperFactor, flipDirection.z);
+                    flipImpulse *= flipImpulseFactor;
+                    flipRb.AddForceAtPosition(flipImpulse, hit.point, ForceMode.Acceleration);
+
+                    isFlipping = true;
+                    _animator.SetBool("IsFlipping", true);
+                    _animator.SetLayerWeight(_animator.GetLayerIndex("UpperBody"), 1);
+                    yield return new WaitForSeconds(flipTime);
+                    isFlipping = false;
+                    _animator.SetBool("IsFlipping", false);
+                    _animator.SetLayerWeight(_animator.GetLayerIndex("UpperBody"), 0);
+
+                }
+
+            }
+
+        }
+        
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(_hips.position + 0.5f * _hips.forward + 0.2f * _hips.up, 0.6f);
     }
 }

@@ -2,15 +2,20 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlanePhysics : MonoBehaviour
 {
-    [SerializeField] float DragCoefficient;
     [SerializeField] float LiftCoefficient;
     [SerializeField] float verticalSabilizingMomentumCoefficient;
     [SerializeField] float horizontalSabilizingMomentumCoefficient;
 
     [SerializeField] float softnessOfWings;
+
+    [SerializeField] private float _enemyImpactFactor;
+    [SerializeField] private LayerMask _whatIsEnemy;
+    [SerializeField] private LayerMask _whatIsUsedWeapon;
+    [SerializeField] private float _lifetimeAfterHit;
 
     private Rigidbody _rigidbody;
     private WingFlap wingFlap;
@@ -20,12 +25,6 @@ public class PlanePhysics : MonoBehaviour
     {
         _rigidbody = GetComponent<Rigidbody>();
         wingFlap = GetComponent<WingFlap>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     private void FixedUpdate()
@@ -55,5 +54,16 @@ public class PlanePhysics : MonoBehaviour
         _rigidbody.AddRelativeTorque(new Vector3(verticalSabilizingMomentum, horizontalSabilizingMomentum, 0.0f));
 
         wingFlap.bendFactor = Mathf.Clamp(softnessOfWings * velocity.z, 0.0f, 1.0f);
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (1 << collision.collider.gameObject.layer == _whatIsEnemy.value)
+        {
+            collision.rigidbody.AddForceAtPosition(_enemyImpactFactor * - collision.impulse, collision.GetContact(0).point, ForceMode.Impulse);
+        }
+        int whatIsUsedWeaponIndex = Mathf.RoundToInt(Mathf.Log(_whatIsUsedWeapon.value, 2));
+        gameObject.layer = whatIsUsedWeaponIndex;
+        Destroy(gameObject, _lifetimeAfterHit);
     }
 }

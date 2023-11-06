@@ -32,7 +32,5 @@ public class PlaneDurability : MonoBehaviour
         damage += durability * (-forwardImpulse);
         damage = Mathf.Clamp(damage, 0.0f, 100.0f);
         GetComponentInChildren<SkinnedMeshRenderer>().SetBlendShapeWeight(0, damage);
-
-        //Debug.Log(durability * (-forwardImpulse));
     }
 }
