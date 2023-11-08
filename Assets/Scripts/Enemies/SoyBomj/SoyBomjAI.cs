@@ -3,16 +3,23 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Rendering;
 using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class SoyBomjAi : MonoBehaviour
 {
-    [SerializeField] private float _health;
-
     private NavMeshAgent _agent;
     [SerializeField] private Transform _hips;
 
     [SerializeField] private float maxAgentToHipsDistance;
+
+    //Health and death
+    [SerializeField] private bool _isDead = false;
+    [SerializeField] private float _maxHealth;
+    public float health;
+    [SerializeField] private ConfigurableJoint _hipsJoint;
+    [SerializeField] private List<ConfigurableJoint> _joints;
+    [SerializeField] private float _destroyAfterDeathTime;
 
     //Animation
     private Animator _animator;
@@ -54,6 +61,8 @@ public class SoyBomjAi : MonoBehaviour
         foreach (LayerMask layer in whatIsFlippableList)
             whatIsFlippable += layer;
         isFlipping = false;
+
+        health = _maxHealth;
     }
 
     // Update is called once per frame
@@ -72,15 +81,19 @@ public class SoyBomjAi : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //replace navmesh agent if it's too far
-        if ((transform.position - _hips.transform.position).magnitude > maxAgentToHipsDistance)
+        if (!_isDead)
         {
-            transform.position = new Vector3(_hips.transform.position.x, 0f, _hips.transform.position.z);
-            _hips.localPosition = new Vector3(0f, _hips.transform.localPosition.y, 0f);
-        }
+            //replace navmesh agent if it's too far
+            if ((transform.position - _hips.transform.position).magnitude > maxAgentToHipsDistance)
+            {
+                transform.position = new Vector3(_hips.transform.position.x, 0f, _hips.transform.position.z);
+                _hips.localPosition = new Vector3(0f, _hips.transform.localPosition.y, 0f);
+            }
 
-        StartCoroutine(Patroling());
-        StartCoroutine(FlipIfBlocks());
+            StartCoroutine(Patroling());
+            StartCoroutine(FlipIfBlocks());
+
+        }
     }
 
     private IEnumerator Patroling()
@@ -132,14 +145,18 @@ public class SoyBomjAi : MonoBehaviour
     {
         if (!isFlipping)
         {
-            RaycastHit hit;           
-            //RaycastHit blockHit;           
-            if (Physics.SphereCast(_hips.position + 0.5f * _hips.forward + 0.2f * _hips.up, 0.6f, _hips.transform.forward, out hit, 0.1f))
+            RaycastHit hit;
+            RaycastHit blockHit;           
+            if (Physics.SphereCast(_hips.position + 0.2f * _hips.up, 1f, _hips.transform.forward, out hit, 0.1f))
             {
-                //Physics.Linecast(_hips.position, hit.point + 0.001f * (hit.point - _hips.position).normalized, out blockHit);
+                //Physics.Raycast(_hips.position + 0.2f * _hips.up, hit.point - 0.001f * (hit.point - _hips.position).normalized, out blockHit);
                 // if nothing blocks
-                //if (blockHit.transform.gameObject == hit.transform.gameObject)
-                if (whatIsFlippable == (whatIsFlippable | (1 << hit.transform.gameObject.layer)))
+                //if (whatIsFlippable == (whatIsFlippable | (1 << hit.transform.gameObject.layer)))
+                //Debug.DrawLine(_hips.position + 0.2f * _hips.up, hit.point, Color.red);
+                Debug.DrawLine(_hips.position + 0.2f * _hips.up, hit.point, Color.red);
+                Debug.DrawRay(_hips.position + 0.2f * _hips.up, _hips.transform.forward, Color.blue);
+                //if (true)
+                if (!Physics.Linecast(_hips.position + 0.2f * _hips.up, hit.point - 0.001f * (hit.point - _hips.position).normalized, out blockHit))
                 {
                     Rigidbody flipRb = hit.transform.GetComponent<Rigidbody>();
                     Vector3 flipDirection = (hit.point - transform.position).normalized;
@@ -165,6 +182,36 @@ public class SoyBomjAi : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawWireSphere(_hips.position + 0.5f * _hips.forward + 0.2f * _hips.up, 0.6f);
+        Gizmos.DrawWireSphere(_hips.position + 0.2f * _hips.up, 1f);
+    }
+
+    public void TriggerDeath()
+    {
+        _isDead = true;
+
+        JointDrive zeroDrive = new JointDrive();
+        zeroDrive.positionSpring = 0;
+
+        _hipsJoint.angularYMotion = ConfigurableJointMotion.Free;
+        _hipsJoint.xDrive = zeroDrive;
+        _hipsJoint.yDrive = zeroDrive;
+        _hipsJoint.zDrive = zeroDrive;
+
+        _hipsJoint.angularXDrive = zeroDrive;
+        _hipsJoint.angularYZDrive = zeroDrive;
+
+        foreach (ConfigurableJoint joint in _joints)
+        {
+            joint.xDrive = zeroDrive;
+            joint.yDrive = zeroDrive;
+            joint.zDrive = zeroDrive;
+
+            joint.angularXDrive = zeroDrive;
+            joint.angularYZDrive = zeroDrive;
+        }
+
+        _agent.enabled = false;
+
+        Destroy(gameObject, _destroyAfterDeathTime);
     }
 }

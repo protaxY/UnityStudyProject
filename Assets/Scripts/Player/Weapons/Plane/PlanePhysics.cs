@@ -14,8 +14,11 @@ public class PlanePhysics : MonoBehaviour
 
     [SerializeField] private float _enemyImpactFactor;
     [SerializeField] private LayerMask _whatIsEnemy;
+    [SerializeField] private LayerMask _whatIsWeapon;
     [SerializeField] private LayerMask _whatIsUsedWeapon;
     [SerializeField] private float _lifetimeAfterHit;
+
+    [SerializeField] private float _damage;
 
     private Rigidbody _rigidbody;
     private WingFlap wingFlap;
@@ -58,9 +61,17 @@ public class PlanePhysics : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (1 << collision.collider.gameObject.layer == _whatIsEnemy.value)
+        int whatIsWeaponIndex = Mathf.RoundToInt(Mathf.Log(_whatIsWeapon.value, 2));
+        if (1 << collision.collider.gameObject.layer == _whatIsEnemy.value
+            && gameObject.layer == whatIsWeaponIndex)
         {
             collision.rigidbody.AddForceAtPosition(_enemyImpactFactor * - collision.impulse, collision.GetContact(0).point, ForceMode.Impulse);
+            collision.transform.root.GetComponent<SoyBomjAi>().health -= _damage;
+            if (collision.transform.root.GetComponent<SoyBomjAi>().health < 0f)
+            {
+                collision.transform.root.GetComponent<SoyBomjAi>().TriggerDeath();
+                collision.rigidbody.AddForceAtPosition(_enemyImpactFactor * -collision.impulse, collision.GetContact(0).point, ForceMode.Impulse);
+            }
         }
         int whatIsUsedWeaponIndex = Mathf.RoundToInt(Mathf.Log(_whatIsUsedWeapon.value, 2));
         gameObject.layer = whatIsUsedWeaponIndex;

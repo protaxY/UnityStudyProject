@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerShooter : MonoBehaviour
 {
-    [SerializeField] private int _planesCount;
+    [SerializeField] public int _planesCount;
     [SerializeField] private float _throwTimer;
     [SerializeField] private float _throwFrowardImpulse;
     [SerializeField] private GameObject _planePrefab;
@@ -25,6 +25,12 @@ public class PlayerShooter : MonoBehaviour
     void Start()
     {
         _camera = GetComponentInChildren<Camera>();
+
+        if (_planesCount > 0)
+        {
+            SpawnPlane();
+            _isSpawned = true;
+        }
     }
     private void Awake()
     {
@@ -46,11 +52,11 @@ public class PlayerShooter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!_isSpawned)
-        {
-            SpawnPlane();
-            _isSpawned = true;
-        }
+        //if (!_isSpawned)
+        //{
+        //    SpawnPlane();
+        //    _isSpawned = true;
+        //}
     }
 
     private void SpawnPlane()
@@ -62,7 +68,7 @@ public class PlayerShooter : MonoBehaviour
     }
     private IEnumerator ThrowPlaneAsync()
     {
-        if (!_isThrowing)
+        if (!_isThrowing && _isSpawned)
         {
             Rigidbody planeRb = _currentPlane.transform.GetComponent<Rigidbody>();
 
@@ -77,8 +83,17 @@ public class PlayerShooter : MonoBehaviour
 
             yield return new WaitForSeconds(_throwTimer);
 
-            _isSpawned = false;
+            //_isSpawned = false;
             _isThrowing = false;
+            _isSpawned = false;
+            _planesCount--;
+
+            if (_planesCount > 0)
+            {
+                SpawnPlane();
+                _isSpawned = true;
+            }
+            
         }
         
     }
@@ -92,6 +107,12 @@ public class PlayerShooter : MonoBehaviour
             {
                 _planesCount += hit.collider.transform.GetComponent<PaperCollectable>().paperCount;
                 Destroy(hit.collider.gameObject);
+
+                if (_planesCount > 0 && !_isSpawned)
+                {
+                    SpawnPlane();
+                    _isSpawned = true;
+                }
             }
         }
     }

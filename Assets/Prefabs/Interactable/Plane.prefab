@@ -339,10 +339,14 @@ MonoBehaviour:
   _whatIsEnemy:
     serializedVersion: 2
     m_Bits: 256
+  _whatIsWeapon:
+    serializedVersion: 2
+    m_Bits: 4096
   _whatIsUsedWeapon:
     serializedVersion: 2
     m_Bits: 8192
   _lifetimeAfterHit: 5
+  _damage: 51
 --- !u!114 &6827733391224903573
 MonoBehaviour:
   m_ObjectHideFlags: 0

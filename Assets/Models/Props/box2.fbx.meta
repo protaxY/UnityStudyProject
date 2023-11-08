@@ -3,7 +3,12 @@ guid: 8ca307da54c91f741a6c096f1f5bbd11
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: papGr
+    second: {fileID: 2100000, guid: b6d93a9ef8a3ff34bb3e7cdd0ea57571, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
