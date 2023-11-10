@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 
 public class PlayerShooter : MonoBehaviour
 {
@@ -11,8 +13,6 @@ public class PlayerShooter : MonoBehaviour
     [SerializeField] private Vector3 _handOffset;
     [SerializeField] private float _collectDistance;
     [SerializeField] private LayerMask _whatIsPaper;
-    //[SerializeField] private LayerMask _whatIsInHand;
-    //[SerializeField] private LayerMask _whatIsWeapon;
 
     private Camera _camera;
     private PlayerInput _playerInput;
@@ -20,6 +20,8 @@ public class PlayerShooter : MonoBehaviour
     private bool _isSpawned = false;
     private bool _isThrowing = false;
     private GameObject _currentPlane;
+
+    public event Action<int> onPlanesCountChanged;
 
     // Start is called before the first frame update
     void Start()
@@ -87,6 +89,7 @@ public class PlayerShooter : MonoBehaviour
             _isThrowing = false;
             _isSpawned = false;
             _planesCount--;
+            onPlanesCountChanged?.Invoke(_planesCount);
 
             if (_planesCount > 0)
             {
@@ -106,6 +109,7 @@ public class PlayerShooter : MonoBehaviour
             if (1 << hit.collider.transform.gameObject.layer == _whatIsPaper.value)
             {
                 _planesCount += hit.collider.transform.GetComponent<PaperCollectable>().paperCount;
+                onPlanesCountChanged?.Invoke(_planesCount);
                 Destroy(hit.collider.gameObject);
 
                 if (_planesCount > 0 && !_isSpawned)

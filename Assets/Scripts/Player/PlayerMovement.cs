@@ -26,7 +26,7 @@ public class PlayerMovement : MonoBehaviour
     {
         _playerInput = new PlayerInput();
         _playerInput.Player.Jump.performed += context => Jump();
-        _playerInput.Player.Charge.performed += context => StartCoroutine(ChargeAsync()); ;
+        _playerInput.Player.Charge.performed += context => StartCoroutine(ChargeAsync());
     }
 
     private void OnEnable()
@@ -80,14 +80,16 @@ public class PlayerMovement : MonoBehaviour
         inputVelocity = transform.TransformDirection(inputVelocity);
 
         _rb.MovePosition(_rb.position + inputVelocity * Time.fixedDeltaTime);
-        _rb.AddRelativeForce(inputVelocity * Time.fixedDeltaTime, ForceMode.VelocityChange);
+        _rb.velocity += inputVelocity * Time.fixedDeltaTime;
+        //_rb.AddRelativeForce(inputVelocity * Time.fixedDeltaTime, ForceMode.VelocityChange);
     }
 
     private IEnumerator ChargeAsync()
     {
-        if (!_isCharging)
+        if (!_isCharging && IsGrounded())
         {
-            Vector3 inputVelocity = Vector3.Normalize(GetInputMovementVector());
+            //Vector3 inputVelocity = Vector3.Normalize(GetInputMovementVector());
+            Vector3 inputVelocity = GetInputMovementVector();
             _rb.AddRelativeForce(chargeFactor * inputVelocity, ForceMode.Acceleration);
             _isCharging = true;
             yield return new WaitForSeconds(chargeRecoveryTime);

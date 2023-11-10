@@ -32,120 +32,6 @@ Transform:
   - {fileID: 7017033046136849963}
   m_Father: {fileID: 2930858876010925488}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &319636346932330908
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6285862055958603011}
-  - component: {fileID: 1193181842194776956}
-  m_Layer: 8
-  m_Name: glasses_01
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6285862055958603011
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 319636346932330908}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6111195241867985060}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!137 &1193181842194776956
-SkinnedMeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 319636346932330908}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 3
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 6c2cbe9d9d9c18f4ca37c70960f410e9, type: 2}
-  - {fileID: 2100000, guid: 6c2cbe9d9d9c18f4ca37c70960f410e9, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  serializedVersion: 2
-  m_Quality: 0
-  m_UpdateWhenOffscreen: 0
-  m_SkinnedMotionVectors: 1
-  m_Mesh: {fileID: 317232032005921007, guid: 389ca3d9c9d4e4f43b89f75ba8cb2335, type: 3}
-  m_Bones:
-  - {fileID: 2511616502528987172}
-  - {fileID: 1219584175723759346}
-  - {fileID: 8611095219242605870}
-  - {fileID: 5256864355360162650}
-  - {fileID: 7700798682901849955}
-  - {fileID: 1267083883442317690}
-  - {fileID: 8601962864699721853}
-  - {fileID: 6822766250412335197}
-  - {fileID: 3699927994410311126}
-  - {fileID: 1375551447864749030}
-  - {fileID: 5108018047546736384}
-  - {fileID: 6909493261487727040}
-  - {fileID: 8590934886473157625}
-  - {fileID: 4241896743009606589}
-  - {fileID: 8316821314652097220}
-  - {fileID: 513929200877777969}
-  - {fileID: 1648682441848537507}
-  - {fileID: 1485398998833543917}
-  - {fileID: 3417888457133495466}
-  - {fileID: 1557369945199000702}
-  - {fileID: 2019976523666829176}
-  - {fileID: 5830383075273669134}
-  - {fileID: 7726080055913740547}
-  - {fileID: 650690828323354654}
-  - {fileID: 6159081232281538958}
-  - {fileID: 1325836171799861223}
-  - {fileID: 5033231588682291077}
-  - {fileID: 8162935634795651558}
-  m_BlendShapeWeights: []
-  m_RootBone: {fileID: 2511616502528987172}
-  m_AABB:
-    m_Center: {x: 0, y: 0.629607, z: 0.1011193}
-    m_Extent: {x: 0.35036108, y: 0.10576528, z: 0.26060554}
-  m_DirtyAABB: 0
 --- !u!1 &337144006404698411
 GameObject:
   m_ObjectHideFlags: 0
@@ -421,13 +307,13 @@ ConfigurableJoint:
   m_RotationDriveMode: 0
   m_AngularXDrive:
     serializedVersion: 4
-    positionSpring: 400
+    positionSpring: 200
     positionDamper: 0
     maximumForce: 3.4028233e+38
     useAcceleration: 0
   m_AngularYZDrive:
     serializedVersion: 4
-    positionSpring: 400
+    positionSpring: 200
     positionDamper: 0
     maximumForce: 3.4028233e+38
     useAcceleration: 0
@@ -587,7 +473,7 @@ SkinnedMeshRenderer:
   m_Quality: 0
   m_UpdateWhenOffscreen: 0
   m_SkinnedMotionVectors: 1
-  m_Mesh: {fileID: 5871187599296032841, guid: 389ca3d9c9d4e4f43b89f75ba8cb2335, type: 3}
+  m_Mesh: {fileID: -7672362871765070506, guid: 389ca3d9c9d4e4f43b89f75ba8cb2335, type: 3}
   m_Bones:
   - {fileID: 2511616502528987172}
   - {fileID: 1219584175723759346}
@@ -847,13 +733,13 @@ ConfigurableJoint:
   m_RotationDriveMode: 0
   m_AngularXDrive:
     serializedVersion: 4
-    positionSpring: 400
+    positionSpring: 200
     positionDamper: 0
     maximumForce: 3.4028233e+38
     useAcceleration: 0
   m_AngularYZDrive:
     serializedVersion: 4
-    positionSpring: 400
+    positionSpring: 200
     positionDamper: 0
     maximumForce: 3.4028233e+38
     useAcceleration: 0
@@ -1062,13 +948,13 @@ ConfigurableJoint:
   m_RotationDriveMode: 0
   m_AngularXDrive:
     serializedVersion: 4
-    positionSpring: 400
+    positionSpring: 20
     positionDamper: 0
     maximumForce: 3.4028233e+38
     useAcceleration: 0
   m_AngularYZDrive:
     serializedVersion: 4
-    positionSpring: 100
+    positionSpring: 20
     positionDamper: 0
     maximumForce: 3.4028233e+38
     useAcceleration: 0
@@ -1101,7 +987,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7269cc66e88b98c4386fe4dbe96c8a75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetLimb: {fileID: 0}
+  targetLimb: {fileID: 2039386662998722153}
 --- !u!114 &7556265340523679018
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1444,13 +1330,13 @@ ConfigurableJoint:
   m_RotationDriveMode: 0
   m_AngularXDrive:
     serializedVersion: 4
-    positionSpring: 400
+    positionSpring: 200
     positionDamper: 0
     maximumForce: 3.4028233e+38
     useAcceleration: 0
   m_AngularYZDrive:
     serializedVersion: 4
-    positionSpring: 400
+    positionSpring: 200
     positionDamper: 0
     maximumForce: 3.4028233e+38
     useAcceleration: 0
@@ -1583,7 +1469,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 742e6525fc65f9a49812bcb24e24fce8, type: 2}
+  - {fileID: -876546973899608171, guid: b0f546a220231f1409a6e1ac13e763cb, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1753,7 +1639,7 @@ SkinnedMeshRenderer:
   m_Quality: 0
   m_UpdateWhenOffscreen: 0
   m_SkinnedMotionVectors: 1
-  m_Mesh: {fileID: 6364487661145299221, guid: 389ca3d9c9d4e4f43b89f75ba8cb2335, type: 3}
+  m_Mesh: {fileID: -125165177194928348, guid: 389ca3d9c9d4e4f43b89f75ba8cb2335, type: 3}
   m_Bones:
   - {fileID: 2511616502528987172}
   - {fileID: 1219584175723759346}
@@ -2096,13 +1982,13 @@ ConfigurableJoint:
   m_RotationDriveMode: 0
   m_AngularXDrive:
     serializedVersion: 4
-    positionSpring: 400
+    positionSpring: 200
     positionDamper: 0
     maximumForce: 3.4028233e+38
     useAcceleration: 0
   m_AngularYZDrive:
     serializedVersion: 4
-    positionSpring: 400
+    positionSpring: 200
     positionDamper: 0
     maximumForce: 3.4028233e+38
     useAcceleration: 0
@@ -2344,13 +2230,13 @@ ConfigurableJoint:
   m_RotationDriveMode: 0
   m_AngularXDrive:
     serializedVersion: 4
-    positionSpring: 400
+    positionSpring: 200
     positionDamper: 0
     maximumForce: 3.4028233e+38
     useAcceleration: 0
   m_AngularYZDrive:
     serializedVersion: 4
-    positionSpring: 400
+    positionSpring: 200
     positionDamper: 0
     maximumForce: 3.4028233e+38
     useAcceleration: 0
@@ -2524,7 +2410,7 @@ Transform:
   m_GameObject: {fileID: 3313753900892846545}
   serializedVersion: 2
   m_LocalRotation: {x: -0.0000017250624, y: 0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0.46523622, z: 0.0046801004}
+  m_LocalPosition: {x: 0, y: 0.46523622, z: 0}
   m_LocalScale: {x: 1, y: 0.99999994, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2637,19 +2523,19 @@ ConfigurableJoint:
   m_TargetVelocity: {x: 0, y: 0, z: 0}
   m_XDrive:
     serializedVersion: 4
-    positionSpring: 10000
+    positionSpring: 1000
     positionDamper: 0
     maximumForce: 3.4028233e+38
     useAcceleration: 0
   m_YDrive:
     serializedVersion: 4
-    positionSpring: 10000
+    positionSpring: 1000
     positionDamper: 0
     maximumForce: 3.4028233e+38
     useAcceleration: 0
   m_ZDrive:
     serializedVersion: 4
-    positionSpring: 10000
+    positionSpring: 1000
     positionDamper: 0
     maximumForce: 3.4028233e+38
     useAcceleration: 0
@@ -2661,20 +2547,20 @@ ConfigurableJoint:
     positionSpring: 100000
     positionDamper: 0
     maximumForce: 3.4028233e+38
-    useAcceleration: 1
+    useAcceleration: 0
   m_AngularYZDrive:
     serializedVersion: 4
     positionSpring: 100000
     positionDamper: 0
     maximumForce: 3.4028233e+38
-    useAcceleration: 1
+    useAcceleration: 0
   m_SlerpDrive:
     serializedVersion: 4
     positionSpring: 0
     positionDamper: 0
     maximumForce: 3.4028233e+38
     useAcceleration: 0
-  m_ProjectionMode: 0
+  m_ProjectionMode: 1
   m_ProjectionDistance: 0.1
   m_ProjectionAngle: 180
   m_ConfiguredInWorldSpace: 0
@@ -3002,13 +2888,13 @@ ConfigurableJoint:
   m_RotationDriveMode: 0
   m_AngularXDrive:
     serializedVersion: 4
-    positionSpring: 400
+    positionSpring: 200
     positionDamper: 0
     maximumForce: 3.4028233e+38
     useAcceleration: 0
   m_AngularYZDrive:
     serializedVersion: 4
-    positionSpring: 400
+    positionSpring: 200
     positionDamper: 0
     maximumForce: 3.4028233e+38
     useAcceleration: 0
@@ -3313,13 +3199,13 @@ ConfigurableJoint:
   m_RotationDriveMode: 0
   m_AngularXDrive:
     serializedVersion: 4
-    positionSpring: 400
+    positionSpring: 200
     positionDamper: 0
     maximumForce: 3.4028233e+38
     useAcceleration: 0
   m_AngularYZDrive:
     serializedVersion: 4
-    positionSpring: 400
+    positionSpring: 200
     positionDamper: 0
     maximumForce: 3.4028233e+38
     useAcceleration: 0
@@ -3483,7 +3369,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6c2cbe9d9d9c18f4ca37c70960f410e9, type: 2}
+  - {fileID: -876546973899608171, guid: a8978a77ca70e32408b677692fbc897d, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3738,13 +3624,13 @@ ConfigurableJoint:
   m_RotationDriveMode: 0
   m_AngularXDrive:
     serializedVersion: 4
-    positionSpring: 400
+    positionSpring: 200
     positionDamper: 0
     maximumForce: 3.4028233e+38
     useAcceleration: 0
   m_AngularYZDrive:
     serializedVersion: 4
-    positionSpring: 400
+    positionSpring: 200
     positionDamper: 0
     maximumForce: 3.4028233e+38
     useAcceleration: 0
@@ -4087,7 +3973,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6c2cbe9d9d9c18f4ca37c70960f410e9, type: 2}
+  - {fileID: -876546973899608171, guid: a8978a77ca70e32408b677692fbc897d, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4338,8 +4224,6 @@ Transform:
   - {fileID: 4022171433217230296}
   - {fileID: 68199649847044098}
   - {fileID: 9067776188385229112}
-  - {fileID: 6285862055958603011}
-  - {fileID: 9112090920625534587}
   - {fileID: 9064816138721730666}
   - {fileID: 1397158099021322437}
   m_Father: {fileID: 3074349749877248056}
@@ -4396,119 +4280,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8427314583341557775}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &6463999654292350904
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 9112090920625534587}
-  - component: {fileID: 7516814164968490557}
-  m_Layer: 8
-  m_Name: hair_01
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &9112090920625534587
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6463999654292350904}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6111195241867985060}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!137 &7516814164968490557
-SkinnedMeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6463999654292350904}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 3
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 6c2cbe9d9d9c18f4ca37c70960f410e9, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  serializedVersion: 2
-  m_Quality: 0
-  m_UpdateWhenOffscreen: 0
-  m_SkinnedMotionVectors: 1
-  m_Mesh: {fileID: 6854868603630751389, guid: 389ca3d9c9d4e4f43b89f75ba8cb2335, type: 3}
-  m_Bones:
-  - {fileID: 2511616502528987172}
-  - {fileID: 1219584175723759346}
-  - {fileID: 8611095219242605870}
-  - {fileID: 5256864355360162650}
-  - {fileID: 7700798682901849955}
-  - {fileID: 1267083883442317690}
-  - {fileID: 8601962864699721853}
-  - {fileID: 6822766250412335197}
-  - {fileID: 3699927994410311126}
-  - {fileID: 1375551447864749030}
-  - {fileID: 5108018047546736384}
-  - {fileID: 6909493261487727040}
-  - {fileID: 8590934886473157625}
-  - {fileID: 4241896743009606589}
-  - {fileID: 8316821314652097220}
-  - {fileID: 513929200877777969}
-  - {fileID: 1648682441848537507}
-  - {fileID: 1485398998833543917}
-  - {fileID: 3417888457133495466}
-  - {fileID: 1557369945199000702}
-  - {fileID: 2019976523666829176}
-  - {fileID: 5830383075273669134}
-  - {fileID: 7726080055913740547}
-  - {fileID: 650690828323354654}
-  - {fileID: 6159081232281538958}
-  - {fileID: 1325836171799861223}
-  - {fileID: 5033231588682291077}
-  - {fileID: 8162935634795651558}
-  m_BlendShapeWeights: []
-  m_RootBone: {fileID: 2511616502528987172}
-  m_AABB:
-    m_Center: {x: 0, y: 0.72470057, z: -0.0168778}
-    m_Extent: {x: 0.35541192, y: 0.28064775, z: 0.3433797}
-  m_DirtyAABB: 0
 --- !u!1 &6524603575091482336
 GameObject:
   m_ObjectHideFlags: 0
@@ -4879,13 +4650,13 @@ ConfigurableJoint:
   m_RotationDriveMode: 0
   m_AngularXDrive:
     serializedVersion: 4
-    positionSpring: 400
+    positionSpring: 200
     positionDamper: 0
     maximumForce: 3.4028233e+38
     useAcceleration: 0
   m_AngularYZDrive:
     serializedVersion: 4
-    positionSpring: 400
+    positionSpring: 200
     positionDamper: 0
     maximumForce: 3.4028233e+38
     useAcceleration: 0
@@ -5137,7 +4908,7 @@ GameObject:
   - component: {fileID: 1456085054506203624}
   - component: {fileID: 4935061658398371356}
   m_Layer: 8
-  m_Name: SoyBomj3
+  m_Name: SoyBomj1 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5172,6 +4943,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0491eaa495c4da948b3aaf9d4670b681, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _hips: {fileID: 2511616502528987172}
+  maxAgentToHipsDistance: 0.4
+  _isDead: 0
+  _maxHealth: 100
+  health: 100
+  _hipsJoint: {fileID: 1295960045668377422}
+  _joints:
+  - {fileID: 5632944882163445885}
+  - {fileID: 7232231607538937922}
+  - {fileID: 1430520014038763329}
+  - {fileID: 3816382466710717086}
+  - {fileID: 7284727330527537924}
+  - {fileID: 3839060849015973636}
+  - {fileID: 2407820786259261277}
+  - {fileID: 3386134676035837713}
+  - {fileID: 1486755742094288288}
+  - {fileID: 8803982230159705015}
+  _destroyAfterDeathTime: 5
   player: {fileID: 0}
   whatIsWalkable:
     serializedVersion: 2
@@ -5179,10 +4968,22 @@ MonoBehaviour:
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 64
-  walkPointRange: 10
-  timeBetweenAttacks: 0
-  sightRange: 0
-  attackRange: 0
+  walkPointRange: 6
+  minIdleTime: 1
+  maxIdleTime: 5
+  maxWalkTime: 5
+  sightRange: 8
+  attackRange: 1
+  attackTime: 2
+  attacKickFactor: 200
+  attackDamage: 10
+  flipTime: 1
+  flipUpperFactor: 2
+  flipImpulseFactor: 200
+  flipDistance: 0.001
+  whatIsFlippableList:
+  - serializedVersion: 2
+    m_Bits: 512
   playerInSightRange: 0
   playerInAttackRange: 0
 --- !u!195 &1456085054506203624
@@ -5195,7 +4996,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 1
+  m_Speed: 2
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 200

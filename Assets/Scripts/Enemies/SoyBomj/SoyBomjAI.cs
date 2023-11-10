@@ -34,10 +34,16 @@ public class SoyBomjAi : MonoBehaviour
     [SerializeField] public float walkPointRange;
     [SerializeField] public float minIdleTime;
     [SerializeField] public float maxIdleTime;
+    [SerializeField] private float maxWalkTime;
+    private float walkTime;
 
     //Attacking
-    [SerializeField] public float timeBetweenAttacks;
-    private bool alreadyAttacked;
+    [SerializeField] public float sightRange;
+    [SerializeField] public float attackRange;
+    [SerializeField] public float attackTime;
+    [SerializeField] public float attacKickFactor;
+    private bool isAttacing;
+    [SerializeField] public float attackDamage;
 
     // Flipping
     [SerializeField] public float flipTime;
@@ -48,8 +54,10 @@ public class SoyBomjAi : MonoBehaviour
     private LayerMask whatIsFlippable;
     private bool isFlipping;
 
+    //Chasing
+    private bool isChasing;
+
     //States
-    public float sightRange, attackRange;
     [SerializeField] public bool playerInSightRange, playerInAttackRange;
 
     // Start is called before the first frame update
@@ -61,6 +69,8 @@ public class SoyBomjAi : MonoBehaviour
         foreach (LayerMask layer in whatIsFlippableList)
             whatIsFlippable += layer;
         isFlipping = false;
+        isIdle = true;
+        isChasing = false;
 
         health = _maxHealth;
     }
@@ -90,43 +100,51 @@ public class SoyBomjAi : MonoBehaviour
                 _hips.localPosition = new Vector3(0f, _hips.transform.localPosition.y, 0f);
             }
 
-            StartCoroutine(Patroling());
-            StartCoroutine(FlipIfBlocks());
+            bool playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
+            bool playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
 
+            if (!playerInSightRange && !playerInAttackRange)
+                StartCoroutine(PatrolingAsync());
+            if (playerInSightRange && !playerInAttackRange)
+                Chase();
+            else
+                isChasing = false;
+            if (playerInAttackRange && playerInSightRange && !isAttacing)
+                StartCoroutine(AttackAsync());
+
+            if (!playerInAttackRange)
+                StartCoroutine(FlipIfBlocksAsync());
+
+            walkTime += Time.fixedDeltaTime;
         }
     }
 
-    private IEnumerator Patroling()
+    private IEnumerator PatrolingAsync()
     {
-        if (!isIdle)
+
+        if (!walkPointSet && isIdle) 
+            SearchWalkPoint();
+        else
         {
-            if (!walkPointSet) SearchWalkPoint();
-
-            if (walkPointSet)
-            {
-                _agent.SetDestination(walkPoint);
-                isIdle = false;
-                if (!_animator.GetBool("IsWalking"))
-                    _animator.SetBool("IsWalking", true);
-
-            }
-
             Vector3 distanceToWalkPoint = transform.position - walkPoint;
-
             //Walkpoint reached
-            if (distanceToWalkPoint.magnitude < 2f)
+            if ((distanceToWalkPoint.magnitude < 2f || walkTime >= maxWalkTime) && !isIdle)
             {
-                walkPointSet = false;
                 if (_animator.GetBool("IsWalking"))
                     _animator.SetBool("IsWalking", false);
 
                 float idleTime = Random.Range(minIdleTime, maxIdleTime);
+                _agent.ResetPath();
+                //isIdle = true;
                 isIdle = true;
                 yield return new WaitForSeconds(idleTime);
-                isIdle = false;
+
+                walkPointSet = false;
             }
+
         }
-        
+
+
     }
 
     private void SearchWalkPoint()
@@ -139,15 +157,58 @@ public class SoyBomjAi : MonoBehaviour
 
         if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsWalkable))
             walkPointSet = true;
+
+        _agent.SetDestination(walkPoint);
+        isIdle = false;
+        if (!_animator.GetBool("IsWalking"))
+            _animator.SetBool("IsWalking", true);
+        walkTime = 0f;
     }
 
-    private IEnumerator FlipIfBlocks()
+    private IEnumerator AttackAsync()
+    {
+        isAttacing = true;
+
+        _animator.SetBool("IsHitting", true);
+        _animator.SetLayerWeight(_animator.GetLayerIndex("UpperBody"), 1);
+
+        RaycastHit hit;
+        Physics.Linecast(_hips.position + 0.2f * _hips.up, player.position, out hit);
+        Debug.DrawLine(_hips.position + 0.2f * _hips.up, hit.point, Color.red);
+        player.GetComponent<Rigidbody>().AddForceAtPosition(attacKickFactor * (player.position - _hips.transform.position).normalized, hit.point, ForceMode.Acceleration);
+        player.GetComponent<PlayerHealth>().health -= attackDamage;
+        player.GetComponent<PlayerHealth>().UpdateHealth();
+        if (player.GetComponent<PlayerHealth>().health <= 0f)
+            player.GetComponent<PlayerHealth>().TriggerDeath();
+
+        yield return new WaitForSeconds(1f);
+
+        _animator.SetBool("IsHitting", false);
+        _animator.SetLayerWeight(_animator.GetLayerIndex("UpperBody"), 0);
+        yield return new WaitForSeconds(attackTime - 1f);
+
+        isAttacing = false;
+    }
+
+    private void Chase()
+    {
+        if (!isChasing)
+        {
+            isChasing = true;
+            if (!_animator.GetBool("IsWalking"))
+                _animator.SetBool("IsWalking", true);
+            _animator.SetLayerWeight(_animator.GetLayerIndex("UpperBody"), 0);
+        }
+        _agent.SetDestination(player.position);
+    }
+
+    private IEnumerator FlipIfBlocksAsync()
     {
         if (!isFlipping)
         {
             RaycastHit hit;
             RaycastHit blockHit;           
-            if (Physics.SphereCast(_hips.position + 0.2f * _hips.up, 1f, _hips.transform.forward, out hit, 0.1f))
+            if (Physics.SphereCast(_hips.position + 0.2f * _hips.up, 1f, _hips.transform.forward, out hit, 0.1f, whatIsFlippable))
             {
                 //Physics.Raycast(_hips.position + 0.2f * _hips.up, hit.point - 0.001f * (hit.point - _hips.position).normalized, out blockHit);
                 // if nothing blocks
