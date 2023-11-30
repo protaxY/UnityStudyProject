@@ -101,7 +101,6 @@ public class PlayerTimer : MonoBehaviour
 
                 _newRecord.enabled = true;
             }
-            //_timer.Reset();
 
             _level—leared.enabled = true;
             _pressRTorestart.enabled = true;
