@@ -18,7 +18,7 @@ public class PlayerMovement : MonoBehaviour
 
     LayerMask excludePlayer;
     private Rigidbody _rb;
-    private float _distanseToBottom = 0.5228f;
+    private float _distanseToBottom = 0.45f;
     private PlayerInput _playerInput;
     private bool _isCharging = false;
 
@@ -43,7 +43,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         _rb = GetComponent<Rigidbody>();
-        excludePlayer = ~(1 << whatIsPlayer);
+        excludePlayer = ~(whatIsPlayer);
     }
 
     private void FixedUpdate()
@@ -53,8 +53,8 @@ public class PlayerMovement : MonoBehaviour
 
     private bool IsGrounded()
     {
-        //Debug.DrawRay(transform.position, transform.TransformDirection(-Vector3.up), Color.blue);
-        return Physics.Raycast(transform.position, transform.TransformDirection(-Vector3.up), _distanseToBottom + 0.01f, excludePlayer);
+        //Debug.DrawRay(transform.position, _distanseToBottom * transform.TransformDirection(-Vector3.up), Color.red);
+        return Physics.Raycast(transform.position, transform.TransformDirection(-Vector3.up), _distanseToBottom, excludePlayer);
     }
 
     private void Jump()

@@ -1,10 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Rendering;
-using static UnityEditor.Experimental.GraphView.GraphView;
+using Random = UnityEngine.Random;
 
 public class SoyBomjAi : MonoBehaviour
 {
@@ -58,7 +57,9 @@ public class SoyBomjAi : MonoBehaviour
     private bool isChasing;
 
     //States
-    [SerializeField] public bool playerInSightRange, playerInAttackRange;
+    public bool playerInSightRange, playerInAttackRange;
+
+    [SerializeField] public event Action onDeath;
 
     // Start is called before the first frame update
     void Start()
@@ -274,5 +275,7 @@ public class SoyBomjAi : MonoBehaviour
         _agent.enabled = false;
 
         Destroy(gameObject, _destroyAfterDeathTime);
+
+        onDeath?.Invoke();
     }
 }
