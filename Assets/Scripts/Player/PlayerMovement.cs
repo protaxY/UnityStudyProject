@@ -53,7 +53,6 @@ public class PlayerMovement : MonoBehaviour
 
     private bool IsGrounded()
     {
-        //Debug.DrawRay(transform.position, _distanseToBottom * transform.TransformDirection(-Vector3.up), Color.red);
         return Physics.Raycast(transform.position, transform.TransformDirection(-Vector3.up), _distanseToBottom, excludePlayer);
     }
 
@@ -81,14 +80,12 @@ public class PlayerMovement : MonoBehaviour
 
         _rb.MovePosition(_rb.position + inputVelocity * Time.fixedDeltaTime);
         _rb.velocity += inputVelocity * Time.fixedDeltaTime;
-        //_rb.AddRelativeForce(inputVelocity * Time.fixedDeltaTime, ForceMode.VelocityChange);
     }
 
     private IEnumerator ChargeAsync()
     {
         if (!_isCharging && IsGrounded())
         {
-            //Vector3 inputVelocity = Vector3.Normalize(GetInputMovementVector());
             Vector3 inputVelocity = GetInputMovementVector();
             _rb.AddRelativeForce(chargeFactor * inputVelocity, ForceMode.Acceleration);
             _isCharging = true;

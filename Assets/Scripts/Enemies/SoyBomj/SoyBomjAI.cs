@@ -76,20 +76,6 @@ public class SoyBomjAi : MonoBehaviour
         health = _maxHealth;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        //Check for sight and attack range
-        //playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
-        //playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
-
-        //if (!playerInSightRange && !playerInAttackRange) Patroling();
-        //if (playerInSightRange && !playerInAttackRange) ChasePlayer();
-        //if (playerInAttackRange && playerInSightRange) AttackPlayer();
-
-        
-    }
-
     private void FixedUpdate()
     {
         if (!_isDead)
@@ -142,10 +128,7 @@ public class SoyBomjAi : MonoBehaviour
 
                 walkPointSet = false;
             }
-
         }
-
-
     }
 
     private void SearchWalkPoint()
@@ -211,13 +194,9 @@ public class SoyBomjAi : MonoBehaviour
             RaycastHit blockHit;           
             if (Physics.SphereCast(_hips.position + 0.2f * _hips.up, 1f, _hips.transform.forward, out hit, 0.1f, whatIsFlippable))
             {
-                //Physics.Raycast(_hips.position + 0.2f * _hips.up, hit.point - 0.001f * (hit.point - _hips.position).normalized, out blockHit);
-                // if nothing blocks
-                //if (whatIsFlippable == (whatIsFlippable | (1 << hit.transform.gameObject.layer)))
-                //Debug.DrawLine(_hips.position + 0.2f * _hips.up, hit.point, Color.red);
                 Debug.DrawLine(_hips.position + 0.2f * _hips.up, hit.point, Color.red);
                 Debug.DrawRay(_hips.position + 0.2f * _hips.up, _hips.transform.forward, Color.blue);
-                //if (true)
+
                 if (!Physics.Linecast(_hips.position + 0.2f * _hips.up, hit.point - 0.001f * (hit.point - _hips.position).normalized, out blockHit))
                 {
                     Rigidbody flipRb = hit.transform.GetComponent<Rigidbody>();
@@ -233,13 +212,9 @@ public class SoyBomjAi : MonoBehaviour
                     isFlipping = false;
                     _animator.SetBool("IsFlipping", false);
                     _animator.SetLayerWeight(_animator.GetLayerIndex("UpperBody"), 0);
-
                 }
-
             }
-
-        }
-        
+        }    
     }
 
     private void OnDrawGizmos()

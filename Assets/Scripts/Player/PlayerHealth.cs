@@ -34,7 +34,6 @@ public class PlayerHealth : MonoBehaviour
         GetComponent<PlayerMovement>().enabled = false;
         GetComponent<PlayerShooter>().enabled = false;
         GetComponent<MouseController>().enabled = false;
-        //GetComponent<Rigidbody>().isKinematic = true;
         onDeath?.Invoke();
 
         _playerInput.Player.Restart.performed += context => SceneManager.LoadScene("office");

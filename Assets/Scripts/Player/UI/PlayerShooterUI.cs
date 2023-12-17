@@ -14,6 +14,7 @@ public class PlayerShooterUI : MonoBehaviour
     [SerializeField] private TMP_Text _healthCount;
     [SerializeField] private TMP_Text _gameOver;
     [SerializeField] private TMP_Text _PressRTorestart;
+    [SerializeField] private TMP_Text _PressEscToQuit;
 
     // Start is called before the first frame update
     void Start()
@@ -33,12 +34,6 @@ public class PlayerShooterUI : MonoBehaviour
         _playerHealth.onHealthChanged -= UpdateHealthCount;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void UpdatePlanesCount(int value)
     {
         _planesCount.text = value.ToString();
@@ -48,6 +43,7 @@ public class PlayerShooterUI : MonoBehaviour
     {
         _gameOver.enabled = true;
         _PressRTorestart.enabled = true;
+        _PressEscToQuit.enabled = true;
     }
 
     private void UpdateHealthCount(float value)

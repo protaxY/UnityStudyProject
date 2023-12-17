@@ -56,8 +56,6 @@ public class PlayerShooter : MonoBehaviour
     {
         _currentPlane = Instantiate(_planePrefab, _camera.transform.TransformPoint(_handOffset), _camera.transform.rotation, _camera.transform);
         _currentPlane.transform.GetComponentInChildren<Collider>().enabled = false;
-        //int whatIsInHandIndex = Mathf.RoundToInt(Mathf.Log(_whatIsInHand.value, 2));
-        //_currentPlane.layer = whatIsInHandIndex;
     }
     private IEnumerator ThrowPlaneAsync()
     {
@@ -65,8 +63,6 @@ public class PlayerShooter : MonoBehaviour
         {
             Rigidbody planeRb = _currentPlane.transform.GetComponent<Rigidbody>();
 
-            //int whatIsWeaponIndex = Mathf.RoundToInt(Mathf.Log(_whatIsWeapon.value, 2));
-            //_currentPlane.layer = whatIsWeaponIndex;
             _currentPlane.transform.GetComponentInChildren<Collider>().enabled = true;
             _currentPlane.transform.SetParent(null, true);
             planeRb.isKinematic = false;
@@ -87,9 +83,7 @@ public class PlayerShooter : MonoBehaviour
                 SpawnPlane();
                 _isSpawned = true;
             }
-            
         }
-        
     }
 
     private void Collect()

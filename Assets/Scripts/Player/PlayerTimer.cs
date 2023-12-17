@@ -11,6 +11,7 @@ public class PlayerTimer : MonoBehaviour
     [SerializeField] private TMP_Text _bestTimeText;
     [SerializeField] private TMP_Text _bomjesLeft;
     [SerializeField] private TMP_Text _pressRTorestart;
+    [SerializeField] private TMP_Text _PressEscToQuit;
     [SerializeField] private TMP_Text _level—leared;
     [SerializeField] private TMP_Text _newRecord;
 
@@ -104,6 +105,7 @@ public class PlayerTimer : MonoBehaviour
 
             _level—leared.enabled = true;
             _pressRTorestart.enabled = true;
+            _PressEscToQuit.enabled = true;
 
             GetComponent<PlayerMovement>().enabled = false;
             GetComponent<PlayerShooter>().enabled = false;

@@ -6,11 +6,11 @@ using UnityEngine.UI;
 
 public class PlanePhysics : MonoBehaviour
 {
-    [SerializeField] float LiftCoefficient;
-    [SerializeField] float verticalSabilizingMomentumCoefficient;
-    [SerializeField] float horizontalSabilizingMomentumCoefficient;
+    [SerializeField] private float LiftCoefficient;
+    [SerializeField] private float verticalSabilizingMomentumCoefficient;
+    [SerializeField] private float horizontalSabilizingMomentumCoefficient;
 
-    [SerializeField] float softnessOfWings;
+    [SerializeField] private float softnessOfWings;
 
     [SerializeField] private float _enemyImpactFactor;
     [SerializeField] private LayerMask _whatIsEnemy;
@@ -49,7 +49,6 @@ public class PlanePhysics : MonoBehaviour
         Vector3 liftForce = new Vector3(0.0f, LiftCoefficient * Mathf.Pow(velocity.z, 2), 0.0f);
         float verticalSabilizingMomentum = verticalSabilizingMomentumCoefficient * angleOfAtack * Mathf.Pow(velocity.magnitude, 2);
         float horizontalSabilizingMomentum = horizontalSabilizingMomentumCoefficient * slidingAngle * Mathf.Pow(velocity.magnitude, 2);
-
         // Mz = mz q S ba, mz - коэффициент момента тангажа, q - скоростной напор, S - площадь крыла, ba - средняя аэродинамическая хорда (САХ)
 
         _rigidbody.AddRelativeForce(liftForce);
