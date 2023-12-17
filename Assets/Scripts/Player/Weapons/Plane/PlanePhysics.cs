@@ -65,10 +65,12 @@ public class PlanePhysics : MonoBehaviour
             && gameObject.layer == whatIsWeaponIndex)
         {
             collision.rigidbody.AddForceAtPosition(_enemyImpactFactor * - collision.impulse, collision.GetContact(0).point, ForceMode.Impulse);
-            collision.transform.root.GetComponent<SoyBomjAi>().health -= _damage;
-            if (collision.transform.root.GetComponent<SoyBomjAi>().health < 0f)
+
+            SoyBomjAi soyBomjAi = collision.transform.root.GetComponent<SoyBomjAi>();
+            soyBomjAi.health -= _damage;
+            if (soyBomjAi.health < 0f && !soyBomjAi.isDead)
             {
-                collision.transform.root.GetComponent<SoyBomjAi>().TriggerDeath();
+                soyBomjAi.TriggerDeath();
                 collision.rigidbody.AddForceAtPosition(_enemyImpactFactor * -collision.impulse, collision.GetContact(0).point, ForceMode.Impulse);
             }
         }

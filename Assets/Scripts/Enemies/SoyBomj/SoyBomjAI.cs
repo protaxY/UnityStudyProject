@@ -13,7 +13,7 @@ public class SoyBomjAi : MonoBehaviour
     [SerializeField] private float maxAgentToHipsDistance;
 
     //Health and death
-    [SerializeField] private bool _isDead = false;
+    [SerializeField] public bool isDead = false;
     [SerializeField] private float _maxHealth;
     public float health;
     [SerializeField] private ConfigurableJoint _hipsJoint;
@@ -78,7 +78,7 @@ public class SoyBomjAi : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!_isDead)
+        if (!isDead)
         {
             //replace navmesh agent if it's too far
             if ((transform.position - _hips.transform.position).magnitude > maxAgentToHipsDistance)
@@ -224,7 +224,7 @@ public class SoyBomjAi : MonoBehaviour
 
     public void TriggerDeath()
     {
-        _isDead = true;
+        isDead = true;
 
         JointDrive zeroDrive = new JointDrive();
         zeroDrive.positionSpring = 0;
@@ -249,8 +249,8 @@ public class SoyBomjAi : MonoBehaviour
 
         _agent.enabled = false;
 
-        Destroy(gameObject, _destroyAfterDeathTime);
-
         onDeath?.Invoke();
+        
+        Destroy(gameObject, _destroyAfterDeathTime);
     }
 }
