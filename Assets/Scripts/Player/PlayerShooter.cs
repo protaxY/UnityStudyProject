@@ -2,7 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Rendering;
+using UnityEngine.SceneManagement;
 
 public class PlayerShooter : MonoBehaviour
 {
@@ -51,16 +52,6 @@ public class PlayerShooter : MonoBehaviour
         _playerInput.Disable();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        //if (!_isSpawned)
-        //{
-        //    SpawnPlane();
-        //    _isSpawned = true;
-        //}
-    }
-
     private void SpawnPlane()
     {
         _currentPlane = Instantiate(_planePrefab, _camera.transform.TransformPoint(_handOffset), _camera.transform.rotation, _camera.transform);
@@ -101,7 +92,7 @@ public class PlayerShooter : MonoBehaviour
         
     }
 
-    void Collect()
+    private void Collect()
     {
         RaycastHit hit;
         if (Physics.Raycast(_camera.transform.position, _camera.transform.forward * _collectDistance, out hit))
@@ -120,4 +111,5 @@ public class PlayerShooter : MonoBehaviour
             }
         }
     }
+
 }

@@ -107,6 +107,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""QuitToMenu"",
+                    ""type"": ""Button"",
+                    ""id"": ""11a48f24-5eb0-4a4f-86e2-933ae425f7e0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -252,6 +261,17 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""action"": ""Restart"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3724a4d8-12e0-4790-a6ea-875efe44e3f4"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse and Keyboard"",
+                    ""action"": ""QuitToMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -286,6 +306,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_Player_ThrowPlane = m_Player.FindAction("ThrowPlane", throwIfNotFound: true);
         m_Player_Collect = m_Player.FindAction("Collect", throwIfNotFound: true);
         m_Player_Restart = m_Player.FindAction("Restart", throwIfNotFound: true);
+        m_Player_QuitToMenu = m_Player.FindAction("QuitToMenu", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -356,6 +377,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_ThrowPlane;
     private readonly InputAction m_Player_Collect;
     private readonly InputAction m_Player_Restart;
+    private readonly InputAction m_Player_QuitToMenu;
     public struct PlayerActions
     {
         private @PlayerInput m_Wrapper;
@@ -369,6 +391,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @ThrowPlane => m_Wrapper.m_Player_ThrowPlane;
         public InputAction @Collect => m_Wrapper.m_Player_Collect;
         public InputAction @Restart => m_Wrapper.m_Player_Restart;
+        public InputAction @QuitToMenu => m_Wrapper.m_Player_QuitToMenu;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -405,6 +428,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Restart.started += instance.OnRestart;
             @Restart.performed += instance.OnRestart;
             @Restart.canceled += instance.OnRestart;
+            @QuitToMenu.started += instance.OnQuitToMenu;
+            @QuitToMenu.performed += instance.OnQuitToMenu;
+            @QuitToMenu.canceled += instance.OnQuitToMenu;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -436,6 +462,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Restart.started -= instance.OnRestart;
             @Restart.performed -= instance.OnRestart;
             @Restart.canceled -= instance.OnRestart;
+            @QuitToMenu.started -= instance.OnQuitToMenu;
+            @QuitToMenu.performed -= instance.OnQuitToMenu;
+            @QuitToMenu.canceled -= instance.OnQuitToMenu;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -473,5 +502,6 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnThrowPlane(InputAction.CallbackContext context);
         void OnCollect(InputAction.CallbackContext context);
         void OnRestart(InputAction.CallbackContext context);
+        void OnQuitToMenu(InputAction.CallbackContext context);
     }
 }

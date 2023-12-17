@@ -29,18 +29,6 @@ public class PlayerHealth : MonoBehaviour
         _playerInput.Disable();
     }
 
-    //// Start is called before the first frame update
-    //void Start()
-    //{
-        
-    //}
-
-    //// Update is called once per frame
-    //void Update()
-    //{
-        
-    //}
-
     public void TriggerDeath()
     {
         GetComponent<PlayerMovement>().enabled = false;

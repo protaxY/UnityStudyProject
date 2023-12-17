@@ -1,12 +1,8 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using TMPro;
-using Unity.PlasticSCM.Editor.WebApi;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class PlayerTimer : MonoBehaviour
@@ -30,6 +26,7 @@ public class PlayerTimer : MonoBehaviour
     private void Awake()
     {
         _playerInput = new PlayerInput();
+        _playerInput.Player.QuitToMenu.performed += context => QuitToMenu();
     }
 
     private void OnEnable()
@@ -52,6 +49,8 @@ public class PlayerTimer : MonoBehaviour
 
         _enemiesLeftCount = _enemies.Count;
 
+        _bestTime = TimeSpan.FromSeconds(PlayerPrefs.GetFloat("bestTime", 0f));
+        
         if (_bestTime != new TimeSpan())
         {
             string bestTime = String.Format("{0:00}:{1:00}:{2:00}",
@@ -95,6 +94,7 @@ public class PlayerTimer : MonoBehaviour
             if (_bestTime == new TimeSpan() || time < _bestTime)
             {
                 _bestTime = time;
+                PlayerPrefs.SetFloat("bestTime", _bestTime.Seconds);
                 string bestTime = String.Format("{0:00}:{1:00}:{2:00}",
                      _bestTime.Minutes, _bestTime.Seconds, _bestTime.Milliseconds / 10);
                 _bestTimeText.text = String.Concat("Best time: ", bestTime);
@@ -113,4 +113,8 @@ public class PlayerTimer : MonoBehaviour
         }
     }
 
+    private void QuitToMenu()
+    {
+        SceneManager.LoadScene("StartMenu");
+    }
 }

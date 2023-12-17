@@ -29,16 +29,10 @@ public class MouseController : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         _camera = transform.Find("PlayerCamera").GetComponent<Camera>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     void SightMove(InputAction.CallbackContext context)
