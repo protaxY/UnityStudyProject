@@ -1,0 +1,1 @@
+[Ссылка на GDD]([/guides/content/editing-an-existing-page](https://docs.google.com/document/d/1mCT-PGhrWkMRz-oXIaymxF4BTHceJZtvJRr8SLicTLg/edit?usp=sharing)https://docs.google.com/document/d/1mCT-PGhrWkMRz-oXIaymxF4BTHceJZtvJRr8SLicTLg/edit?usp=sharing)
