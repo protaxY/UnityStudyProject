@@ -1,6 +1,6 @@
 # БЕЗУМНЫЙ ОФИСНЫЙ НИНДЗЯ (базовый прототип)
 
-![ ](Screenshots\1.png)
+![_](Screenshots/1.png)
 
 Взяв на себя роль безумного офисного ниндзи, мы должны уничтожить зомби-клерков как можно быстрее.
 
@@ -15,8 +15,8 @@
 ### Визуальный стиль
 Low-poly. Основыными референсами служат Job Simulator и Gang Beasts.
 
-![ ](References\JobSimulator.jpg)
-![ ](References\GangBeasts.webp)
+![ ](References/JobSimulator.jpg)
+![ ](References/GangBeasts.webp)
 
 ### Жизненный цикл
 1. Появились в начале уровня.
